@@ -29,13 +29,13 @@ dns_table = Table('dns', metadata,
     Column('last', DateTime),
 
     # Add constraint
-    #UniqueConstraint('query', 'type', 'answer', name='QTA_1'),
+    UniqueConstraint('query', 'type', 'answer', name='QTA_1'),
 )
 
 
 def hashfile(filepath):
     sha1 = hashlib.sha1()
-    f = open(filepath, 'rb')
+    f = open(filepath, 'rb')add
     try:
         sha1.update(f.read())
     finally:
@@ -95,7 +95,7 @@ class SQLStore:
     def close(self):
         self.conn.close()
 
-    def upsert_record(self, query, type, answer, ttl, timestamp, count):
+    def upsert_record(self,add query, type, answer, ttl, timestamp, count):
         d = dns_table.c
         n = ts(int(float(timestamp)))
         ttl = ttl != "-" and int(float(ttl)) or None
